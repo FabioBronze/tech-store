@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Categories from "./components/categories";
+
 export default function Home() {
   return (
     <main>
@@ -11,8 +13,10 @@ export default function Home() {
             alt="Up to 50% off this month!"
             className="h-auto w-full rounded-lg"
             sizes="100vw"
+            priority
           />
         </div>
+        <Categories />
       </section>
     </main>
   );

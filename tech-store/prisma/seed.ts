@@ -97,7 +97,7 @@ async function main() {
 
     const keyboardsCategory = await prisma.category.create({
       data: {
-        name: "Teclados",
+        name: "Keyboards",
         slug: "keyboards",
         imageUrl:
           "https://utfs.io/f/f9f5bf3e-ebdd-49ea-b983-92f930f9afab-7zu99x.png",
@@ -203,7 +203,7 @@ async function main() {
 
     const headphonesCategory = await prisma.category.create({
       data: {
-        name: "Fones",
+        name: "Headphones",
         slug: "headphones",
         imageUrl:
           "https://utfs.io/f/42bb73b3-4a24-4542-aee4-12fa68014dc3-e7tkon.png",
@@ -415,7 +415,7 @@ async function main() {
 
     const monitorsCategory = await prisma.category.create({
       data: {
-        name: "Monitores",
+        name: "Monitors",
         slug: "monitors",
         imageUrl:
           "https://utfs.io/f/7cbf0652-7cdc-468f-9d83-f80a9b0c2c73-11uae7.png",
