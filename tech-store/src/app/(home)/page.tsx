@@ -2,12 +2,21 @@ import Image from "next/image";
 import Categories from "./components/categories";
 import { prismaClient } from "@/lib/prisma";
 import ProductList from "./components/product-list";
+import SectionTitle from "./components/section-title";
 
 export default async function Home() {
   const deals = await prismaClient.product.findMany({
     where: {
       discountPercentage: {
         gt: 0, // Descontos > 0
+      },
+    },
+  });
+
+  const keyboards = await prismaClient.product.findMany({
+    where: {
+      category: {
+        slug: "keyboards",
       },
     },
   });
@@ -21,28 +30,44 @@ export default async function Home() {
             height={0}
             width={0}
             alt="Up to 50% off this month!"
-            className="h-auto w-full rounded-lg p-5"
+            className="h-auto w-full p-5"
             sizes="100vw"
             priority
+            style={{
+              objectFit: "cover",
+              borderRadius: "2rem",
+            }}
           />
         </div>
         <div className="mt-2">
           <Categories />
         </div>
         <div className="mt-8">
-          <p className="mb-2 pl-5 font-bold uppercase">Discount</p>
+          <SectionTitle className="mb-2 pl-5 font-bold uppercase">
+            Discounts
+          </SectionTitle>{" "}
           <ProductList products={deals} />
         </div>
-        <div>
+        <div className="mb-5 mt-5">
           <Image
             src="/mouses-off.jpg"
             height={0}
             width={0}
             alt="Up to 50% off"
-            className="h-auto w-full rounded-lg p-5"
+            className="h-auto w-full p-5"
             sizes="100vw"
             priority
+            style={{
+              objectFit: "cover",
+              borderRadius: "2rem",
+            }}
           />
+        </div>
+        <div>
+          <SectionTitle className="mb-2 pl-5 font-bold uppercase">
+            Keyboards
+          </SectionTitle>
+          <ProductList products={keyboards} />
         </div>
       </section>
     </main>
