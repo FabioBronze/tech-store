@@ -1,7 +1,7 @@
 import { Product } from "@prisma/client";
 
 export interface ProductWithTotalPrice extends Product {
-  // Pega todas as propriedades do Produto
+  // Pega todas as propriedades do Produto e adiciona dinamicamente o totalPrice
   totalPrice: number;
 }
 
@@ -17,7 +17,7 @@ export const computeProductTotalPrice = (
   }
 
   const totalDiscount =
-    Number(product.basePrice) * (product.discountPercentage / 100);
+    Number(product.basePrice) * (product.discountPercentage / 100); // Output: 25% por exemplo
 
   return {
     ...product,
