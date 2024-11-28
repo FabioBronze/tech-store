@@ -53,7 +53,7 @@ export default async function Home() {
         <div className="mt-8">
           <SectionTitle className="mb-2 pl-5 font-bold uppercase">
             Discounts
-          </SectionTitle>{" "}
+          </SectionTitle>
           <ProductList products={deals} />
         </div>
         <div className="mt-5">
