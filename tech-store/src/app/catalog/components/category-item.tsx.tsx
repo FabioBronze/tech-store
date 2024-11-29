@@ -17,6 +17,7 @@ const CategoryItem = ({ category }: CategoryItemProps) => {
           sizes="100vw"
           className="max-w-auto h-auto max-h-[70%] w-auto"
           style={{ objectFit: "contain" }}
+          priority
         />
       </div>
       <div className="rounded-bl-lg rounded-br-lg bg-accent p-2">
