@@ -18,7 +18,7 @@ const CategoryItem = ({ category }: CategoryItemProps) => {
             height={0}
             sizes="100vw"
             className="max-w-auto h-auto max-h-[70%] w-auto"
-            style={{ objectFit: "contain" }}
+            style={{ objectFit: "contain", width: "auto", height: "80px" }}
             priority
           />
         </div>
