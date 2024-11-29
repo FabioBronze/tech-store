@@ -13,12 +13,16 @@ const ProductItem = ({ products }: ProductItemProps) => {
       <div className="relative flex h-[180px] w-full items-center justify-center rounded-lg bg-accent">
   <Image
     src={products.imageUrls[0]}
-    height={170} // Defina um valor fixo para a altura
-    width={110}
+    height={0} 
+    width={0}
     sizes="100vw"
     className="max-w-full max-h-full object-contain"
     alt={products.name}
     priority
+    style={{
+      height: '110px',
+      width: 'auto',
+    }}
   />
   {products.discountPercentage > 0 && (
     <Badge className="absolute left-3 top-3 px-2 py-[2px]">
