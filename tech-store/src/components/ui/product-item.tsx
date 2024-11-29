@@ -21,6 +21,7 @@ const ProductItem = ({ products }: ProductItemProps) => {
             objectFit: "contain",
           }}
           alt={products.name}
+          priority
         />
         {products.discountPercentage > 0 && (
           <Badge className="absolute left-3 top-3 px-2 py-[2px]">
