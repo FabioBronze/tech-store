@@ -23,7 +23,7 @@ const CategoryItem = ({ category }: CategoryItemProps) => {
           />
         </div>
         <div className="rounded-bl-lg rounded-br-lg bg-accent p-2">
-          <p className="text-sm font-semibold">{category.name}</p>
+          <p className="text-sm text-center font-semibold">{category.name}</p>
         </div>
       </div>
     </Link>
