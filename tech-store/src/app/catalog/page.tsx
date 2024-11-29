@@ -7,7 +7,7 @@ const CatalogPage = async () => {
   const categories = await prismaClient.category.findMany({});
 
   return (
-    <div
+    <section
       className="mx-auto flex flex-col gap-8 p-5"
       style={{ maxWidth: "1200px" }}
     >
@@ -24,7 +24,7 @@ const CatalogPage = async () => {
           <CategoryItem category={category} key={category.id} />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 
