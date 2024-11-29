@@ -18,8 +18,10 @@ import {
   SheetHeader,
   SheetTitle,
   SheetDescription,
+  SheetClose,
 } from "./sheet";
 import { signIn, signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 
 const Header: React.FC = () => {
   const { status, data } = useSession();
@@ -66,9 +68,16 @@ const Header: React.FC = () => {
               <Button variant="outline" className="w-full justify-start gap-2">
                 <PercentIcon /> Offers
               </Button>
-              <Button variant="outline" className="w-full justify-start gap-2">
-                <ListOrderedIcon /> Catalog
-              </Button>
+              <SheetClose asChild>
+                <Link href="/catalog">
+                  <Button
+                    variant="outline"
+                    className="w-full justify-start gap-2"
+                  >
+                    <ListOrderedIcon /> Catalog
+                  </Button>
+                </Link>
+              </SheetClose>
               {status === "unauthenticated" && (
                 <Button
                   onClick={handleLoginClick}
