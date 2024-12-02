@@ -30,9 +30,9 @@ const ProductImages = ({ imageUrls, name }: ProductImagesProps) => {
         />
       </div>
       <div className="mt-8 grid grid-cols-4 gap-4 px-5">
-        {imageUrls.map((imageUrl) => (
+        {imageUrls.map((imageUrl, index) => (
           <button
-            key={imageUrl}
+            key={index}
             className={`flex h-[100px] items-center justify-center rounded-sm bg-accent ${imageUrl === currentImage && "border-2 border-solid border-primary"}`}
             onClick={() => handleImageClick(imageUrl)}
           >
