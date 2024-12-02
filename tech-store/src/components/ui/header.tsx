@@ -22,6 +22,7 @@ import {
 } from "./sheet";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import Cart from "./cart";
 
 const Header: React.FC = () => {
   const { status, data } = useSession();
@@ -104,9 +105,16 @@ const Header: React.FC = () => {
             <span className="text-primary">Tech</span> Store
           </h1>
         </Link>
-        <Button size="icon" variant="outline">
-          <ShoppingCartIcon />
-        </Button>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button size="icon" variant="outline">
+              <ShoppingCartIcon />
+            </Button>
+          </SheetTrigger>
+          <SheetContent>
+            <Cart />
+          </SheetContent>
+        </Sheet>
       </Card>
     </header>
   );
