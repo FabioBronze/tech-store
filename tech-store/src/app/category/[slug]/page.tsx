@@ -9,7 +9,6 @@ interface CategoryProductsProps {
 }
 
 const CategoryProducts = async ({ params }: CategoryProductsProps) => {
-  // Await params to resolve before accessing its properties
   const { slug } = params;
 
   const category = await prismaClient.category.findFirst({

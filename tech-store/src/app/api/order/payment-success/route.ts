@@ -41,17 +41,7 @@ export const POST = async (request: Request) => {
     console.log(lineItems);
 
     // UPDATE ORDER
-    if (session.metadata?.orderId) {
-      await prismaClient.order.update({
-        where: {
-          id: session.metadata.orderId,
-        },
-        data: {
-          status: "PAYMENT_CONFIRMED",
-        },
-      });
-    }
-  }
 
-  return NextResponse.json({ received: true });
+    return NextResponse.json({ received: true });
+  }
 };
