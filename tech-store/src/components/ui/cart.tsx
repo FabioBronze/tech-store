@@ -36,6 +36,7 @@ const Cart = () => {
               products.map((product) => (
                 <CartItem
                   key={product.id}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   product={computeProductTotalPrice(product) as any}
                 />
               ))
