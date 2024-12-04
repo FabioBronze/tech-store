@@ -15,33 +15,42 @@ export const POST = async (request: Request) => {
 
   const text = await request.text();
 
-  const event = stripe.webhooks.constructEvent(
-    text,
-    signature,
-    process.env.STRIPE_WEBHOOK_SECRET_KEY,
-  );
+  let event: Stripe.Event;
+  try {
+    event = stripe.webhooks.constructEvent(
+      text,
+      signature,
+      process.env.STRIPE_WEBHOOK_SECRET_KEY,
+    );
+  } catch (err) {
+    console.error("Webhook signature verification failed.", err);
+    return NextResponse.error();
+  }
 
   if (event.type === "checkout.session.completed") {
-    const session = event.data.object as any;
+    const session = event.data.object as Stripe.Checkout.Session;
 
     const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
-      event.data.object.id,
+      session.id,
       {
         expand: ["line_items"],
       },
     );
-    const lineItems = sessionWithLineItems.line_items;
+
+    const lineItems = sessionWithLineItems.line_items?.data || [];
     console.log(lineItems);
 
     // UPDATE ORDER
-    await prismaClient.order.update({
-      where: {
-        id: session.metadata.orderId,
-      },
-      data: {
-        status: "PAYMENT_CONFIRMED",
-      },
-    });
+    if (session.metadata?.orderId) {
+      await prismaClient.order.update({
+        where: {
+          id: session.metadata.orderId,
+        },
+        data: {
+          status: "PAYMENT_CONFIRMED",
+        },
+      });
+    }
   }
 
   return NextResponse.json({ received: true });
