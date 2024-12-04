@@ -1,24 +1,30 @@
+import { PrismaClient } from "@prisma/client";
 import { Badge } from "@/components/ui/badge";
 import ProductItem from "@/components/ui/product-item";
 import { CATEGORY_ICON } from "@/constants/category-icon";
 import { computeProductTotalPrice } from "@/helpers/products";
-import { prismaClient } from "@/lib/prisma";
 
-interface CategoryProductsProps {
-  params: { slug: string };
+// Criação da instância do Prisma Client
+const prisma = new PrismaClient();
+
+async function getCategory(slug: string) {
+  // Buscando a categoria e seus produtos no banco
+  const category = await prisma.category.findFirst({
+    where: { slug },
+    include: { products: true },
+  });
+  return category;
 }
 
-const CategoryProducts = async ({ params }: CategoryProductsProps) => {
+export default async function CategoryProducts({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const { slug } = params;
 
-  const category = await prismaClient.category.findFirst({
-    where: {
-      slug,
-    },
-    include: {
-      products: true,
-    },
-  });
+  // Buscando os dados da categoria
+  const category = await getCategory(slug);
 
   if (!category) {
     return <div>Category not found</div>;
@@ -47,6 +53,4 @@ const CategoryProducts = async ({ params }: CategoryProductsProps) => {
       </div>
     </div>
   );
-};
-
-export default CategoryProducts;
+}
