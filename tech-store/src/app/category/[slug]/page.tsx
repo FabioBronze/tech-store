@@ -9,7 +9,7 @@ interface CategoryProductsProps {
 }
 
 const CategoryProducts = async ({ params }: CategoryProductsProps) => {
-  const { slug } = await params;
+  const { slug } = params;
 
   const category = await prismaClient.category.findFirst({
     where: {
