@@ -4,11 +4,13 @@ import { useContext } from "react";
 import { CartContext } from "@/providers/cart";
 import CartItem from "./cart-item";
 import { computeProductTotalPrice } from "@/helpers/products";
+import { ScrollArea } from "./scroll-area";
+import { Button } from "./button";
 
 const Cart = () => {
   const { products, total, subtotal, totaldiscount } = useContext(CartContext);
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex h-full flex-col gap-8">
       <Badge
         className="w-fit gap-1 border-primary px-3 py-1 text-xs uppercase"
         variant="outline"
@@ -16,17 +18,21 @@ const Cart = () => {
         <ShoppingCartIcon size={14} />
         Cart
       </Badge>
-      <div className="flex flex-col gap-5">
-        {products.length > 0 ? (
-          products.map((product) => (
-            <CartItem
-              key={product.id}
-              product={computeProductTotalPrice(product as any) as any}
-            />
-          ))
-        ) : (
-          <p className="text-center font-semibold">Empty Cart.</p>
-        )}
+      <div className="flex h-full max-h-full flex-col gap-5 overflow-hidden">
+        <ScrollArea className="h-full">
+          <div className="flex h-full flex-col gap-4">
+            {products.length > 0 ? (
+              products.map((product) => (
+                <CartItem
+                  key={product.id}
+                  product={computeProductTotalPrice(product as any) as any}
+                />
+              ))
+            ) : (
+              <p className="text-center font-semibold">Empty Cart.</p>
+            )}
+          </div>
+        </ScrollArea>
       </div>
       <div className="flex flex-col gap-3">
         <div className="flex items-center justify-between border-t-2 py-2 text-xs">
@@ -45,6 +51,7 @@ const Cart = () => {
           <p>Total</p>
           <p>{total}€</p>
         </div>
+        <Button className="text-xs uppercase font-bold">Purchase</Button>
       </div>
     </div>
   );
