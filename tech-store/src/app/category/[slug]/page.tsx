@@ -25,7 +25,10 @@ const CategoryProducts = async ({ params }: CategoryProductsProps) => {
   }
 
   return (
-    <div className="flex mx-auto flex-col gap-8 p-5" style={{ maxWidth: "1000px" }}>
+    <div
+      className="mx-auto flex flex-col gap-8 p-5"
+      style={{ maxWidth: "1000px" }}
+    >
       <Badge
         className="w-fit gap-1 border-primary px-3 py-1 text-sm uppercase"
         variant="outline"
