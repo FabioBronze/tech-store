@@ -45,30 +45,32 @@ const Cart = () => {
           </div>
         </ScrollArea>
       </div>
-      <div className="flex flex-col gap-3">
-        <div className="flex items-center justify-between border-t-2 py-2 text-xs">
-          <p>Subtotal</p>
-          <p>{subtotal}€</p>
+      {products.length > 0 && (
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center justify-between border-t-2 py-2 text-xs">
+            <p>Subtotal</p>
+            <p>{subtotal}€</p>
+          </div>
+          <div className="flex items-center justify-between border-t-2 py-2 text-xs">
+            <p>Delivery</p>
+            <p>FREE</p>
+          </div>
+          <div className="flex items-center justify-between border-t-2 py-2 text-xs">
+            <p>Discounts</p>
+            <p>- {totaldiscount}€</p>
+          </div>
+          <div className="text-l flex items-center justify-between border-t-2 py-2 font-bold">
+            <p>Total</p>
+            <p>{total}€</p>
+          </div>
+          <Button
+            className="text-xs font-bold uppercase"
+            onClick={handleFinishPurchaseClick}
+          >
+            Purchase
+          </Button>
         </div>
-        <div className="flex items-center justify-between border-t-2 py-2 text-xs">
-          <p>Delivery</p>
-          <p>FREE</p>
-        </div>
-        <div className="flex items-center justify-between border-t-2 py-2 text-xs">
-          <p>Discounts</p>
-          <p>- {totaldiscount}€</p>
-        </div>
-        <div className="text-l flex items-center justify-between border-t-2 py-2 font-bold">
-          <p>Total</p>
-          <p>{total}€</p>
-        </div>
-        <Button
-          className="text-xs font-bold uppercase"
-          onClick={handleFinishPurchaseClick}
-        >
-          Purchase
-        </Button>
-      </div>
+      )}
     </div>
   );
 };
