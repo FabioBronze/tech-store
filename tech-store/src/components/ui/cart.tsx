@@ -6,9 +6,22 @@ import CartItem from "./cart-item";
 import { computeProductTotalPrice } from "@/helpers/products";
 import { ScrollArea } from "./scroll-area";
 import { Button } from "./button";
+import { createCheckout } from "@/actions/checkout";
+import { loadStripe } from "@stripe/stripe-js";
 
 const Cart = () => {
   const { products, total, subtotal, totaldiscount } = useContext(CartContext);
+
+  const handleFinishPurchaseClick = async () => {
+    const checkout = await createCheckout(products);
+    const stripe = await loadStripe(
+      process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string,
+    );
+    stripe?.redirectToCheckout({
+      sessionId: checkout.id,
+    });
+  };
+
   return (
     <div className="flex h-full flex-col gap-8">
       <Badge
@@ -51,7 +64,12 @@ const Cart = () => {
           <p>Total</p>
           <p>{total}€</p>
         </div>
-        <Button className="text-xs uppercase font-bold">Purchase</Button>
+        <Button
+          className="text-xs font-bold uppercase"
+          onClick={handleFinishPurchaseClick}
+        >
+          Purchase
+        </Button>
       </div>
     </div>
   );
