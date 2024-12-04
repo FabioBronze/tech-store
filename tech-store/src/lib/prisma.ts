@@ -1,8 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  var cachedPrisma: PrismaClient;
+  // Declare global.cachedPrisma as a PrismaClient instance
+  var cachedPrisma: PrismaClient | undefined;
 }
 
 let prisma: PrismaClient;
